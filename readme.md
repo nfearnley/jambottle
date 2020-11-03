@@ -30,4 +30,4 @@ When the bot first runs, it will skip any previous entries, and start posting en
 
 If you stop and restart the bot, it will keep track of where it last left off and continue posting entries from there.
 
-If you'd like to repost all entries from the beginning, just run `jambottle --catch` to reset the entry tracking.
+If you'd like to repost all entries from the beginning, just run `jambottle --catchup` to reset the entry tracking.
