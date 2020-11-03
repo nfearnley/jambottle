@@ -2,12 +2,25 @@ import argparse
 import asyncio
 from pathlib import Path
 import json
+from itertools import islice
 
 import appdirs
 import arrow
 import requests
 from discord import Webhook, RequestsWebhookAdapter, Embed
 from discord.utils import sleep_until
+
+
+# https://stackoverflow.com/questions/3992735/python-generator-that-groups-another-iterable-into-groups-of-n/3992765
+# https://stackoverflow.com/questions/31164731/python-chunking-csv-file-multiproccessing/31170795#31170795
+# https://docs.python.org/3/library/functions.html#iter
+def grouper(n, iterable):
+    """
+    >>> list(grouper(3, 'ABCDEFG'))
+    [['A', 'B', 'C'], ['D', 'E', 'F'], ['G']]
+    """
+    iterable = iter(iterable)
+    return iter(lambda: list(islice(iterable, n)), [])
 
 
 def getdatadir():
@@ -113,7 +126,8 @@ def post_entries(webhookurl, entries):
     if not entries:
         return
     webhook = Webhook.from_url(webhookurl, adapter=RequestsWebhookAdapter())
-    webhook.send(embeds=[e.to_embed() for e in entries])
+    for chunk in grouper(entries, 10):
+        webhook.send(embeds=[e.to_embed() for e in chunk])
 
 
 def get_args():
