@@ -7,25 +7,27 @@ A bot that announces new itch.io jam entries to a discord channel
 python >= 3.8
 
 ## Installation
-type `pip install jambottle`
+`pip install jambottle`
 
 ## Configuration
-The configuration file is at 
+Configuration file location:
 `"C:\Users\[username]\AppData\Local\Natalie Fearnley\jambottle\conf.json"` on Windows
-and `/home/[username]/.local/share/jambottle/conf.json` on Linux
+`/home/[username]/.local/share/jambottle/conf.json` on Linux
 
 Open the file and add a `jamurl` and `webhookurl`.
 
-Optionally you can set a `delay` to the number of minutes you want jambottle to wait between checks.
+Optionally you can set a `delay` to the number of minutes you want jambottle to wait between checking for new entries.
 
-An example conf.json is available in the [/examples](/examples) directory.
+An example [conf.json](/examples/conf.json) is available in the examples directory.
 
 
 ## Running
 To run the bot just type `jambottle` in the command line.
 
-It will check for new entries (by default, every 5 minutes) and then post any new entries in the webhook channel you have provided.
+The bot will check for new entries (by default, every 5 minutes) and then post any new entries in the webhook channel you have provided.
 
-Once the bot first runs, it will skip any previous entries, and only post new entries from that time going forward.
+When the bot first runs, it will skip any previous entries, and start posting entries as they are added.
 
-If you'd like to repost all entries from the beginning, run `jambottle --catch` to reset the entry tracking.
+If you stop and restart the bot, it will keep track of where it last left off and continue posting entries from there.
+
+If you'd like to repost all entries from the beginning, just run `jambottle --catch` to reset the entry tracking.
