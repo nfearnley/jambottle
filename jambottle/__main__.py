@@ -1,4 +1,4 @@
-from jambottle import run
+from jambottle.main import main
 
 if __name__ == "__main__":
-    run()
+    main()
