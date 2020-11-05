@@ -1,12 +1,9 @@
-import json
 from typing import List
 import re
 
 import arrow
 import requests
 from discord import Embed
-
-from jambottle.utils import grouper
 
 
 class Jam():
