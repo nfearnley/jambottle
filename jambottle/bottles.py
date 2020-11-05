@@ -90,12 +90,12 @@ class Entry():
             description=self.description,
             timestamp=self.created_at.datetime
         )
-        e.set_author(name=self.author, url=self.url)
+        e.set_author(name=self.author, url=self.author_url)
         e.set_image(url=self.image_url)
         if self.colour is not None:
             e.colour = self.colour
         return e
-    
+
     def __lt__(self, other):
         return self.created_at < other.created_at
 
