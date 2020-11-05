@@ -60,6 +60,7 @@ def fetch_entries(jam) -> List["Entry"]:
     j = requests.get(jam.entries_url).json()
     entries = [Entry.from_json(e) for e in j["jam_games"]]
     entries = [e for e in entries if e.created_at > jam.since]
+    entries.sort()
     jam.since = arrow.get(j["generated_on"])
     return entries
 
@@ -94,6 +95,9 @@ class Entry():
         if self.colour is not None:
             e.colour = self.colour
         return e
+    
+    def __lt__(self, other):
+        return self.created_at < other.created_at
 
     @classmethod
     def from_json(cls, j):

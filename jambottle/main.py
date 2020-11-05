@@ -66,7 +66,7 @@ async def reset(ctx, jamurl):
     jam = conf.jams[conf.jams.index(jam)]
     jam.reset()
     conf.save()
-    await ctx.send(f"Reset {jam_title}")
+    await ctx.send(f"Resetting {jam_title}. Notifications should appear in a few minutes.")
 
 
 @tasks.loop(minutes=5)
